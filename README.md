@@ -10,7 +10,7 @@ These instructions will help you set up and run the AI chatbot on your system.
 
 ### Prerequisites
 
-Before you begin, make sure you have Python 3.x and is suggested 3.10 installed on your system. You will also need to install the required Python packages. To install them, run the following command: `pip install -r requirements.txt`.
+Before you begin, make sure you have Python 3.x (suggested 3.10) installed on your system. You will also need to install the required Python packages. To install them, run the following command: `pip install -r requirements.txt`.
 
 # How to Create a Telegram Bot and Obtain the Token
 
@@ -50,7 +50,7 @@ If you don't already have one, create a Telegram account.
 
 ## Step 8: Configure Your Bot
 
-- Use the API token you obtained from BotFather to configure your bot in your code or bot development platform. In the code you provided, you can replace the placeholder token with the one you received from BotFather.
+- Use the API token you obtained from BotFather to configure your bot in your code. Insert the token in the designated place in your code.
 
 And that's it! You've created a Telegram bot and obtained the token to use in your bot code. Now you can integrate your bot with the Telegram platform and start building its functionalities.
 
@@ -66,47 +66,37 @@ To start the chatbot, use the following command `python chatbot.py`.
 
 You can convert text into lifelike speech using the `/tts` command. Customize the voice by choosing the language and speaker.
 
-### 💬 Chat
+💬 Chat Command:
+To chat with the bot, use the "/chat" command followed by your message. For instance, you can send "/chat what is Wikipedia?" to start a chat with the bot. You can also send PDF or TXT documents to the bot for discussion; it will process them and respond to your questions. To chat with files, use the "/chat_with_files" command followed by a question related to the files.
 
-Engage in natural conversations with the bot using the `/chat` command. The bot responds with meaningful interactions.
+📃 Summarize Text Command:
+Use the "/summarize_text" command to summarize text. Specify the minimum and maximum percentage of the summary along with the text you want to summarize.
 
-### 📃 Summarize Text
+🎙️ Summarize Audio Command:
+The "/summarize_audio" command allows you to transcribe and summarize audio files. Provide the file name, language, and desired summary percentage.
 
-Use the `/summarize_text` command to summarize text. Specify the minimum and maximum percentage of the summary along with the text you want to summarize.
+📺 Summarize YouTube Video Command:
+Summarize YouTube videos with the "/summarize_yt_video" command. Provide the video link, language, and summary percentages.
 
-### 🎙️ Summarize Audio
+🎙️ Speech Enhancement Command:
+Improve audio quality by uploading your audio file and using the "/speech_enhancement" command.
 
-The `/summarize_audio` command allows you to transcribe and summarize audio files. Provide the file name, language, and desired summary percentage.
+🗑️ Clean Files Command:
+Use the "/clean_files" command to remove files you've sent to the bot.
 
-### 📺 Summarize YouTube Video
+🤖 Chat with Models:
+Chat with AI models by using the "/chat" command followed by your message.
 
-Summarize YouTube videos with the `/summarize_yt_video` command. Provide the video link, language, and summary percentages.
+💬 Chat with Embeddings:
+For more advanced chat capabilities, use the "/chat_with_files" command followed by your message.
 
-### 🎙️ Speech Enhancement
-
-Improve audio quality by uploading your audio file and using the `/speech_enhancement` command.
-
-### 🗑️ Clean Files
-
-Use the `/clean_files` command to remove files you've sent to the bot.
-
-### 🤖 Chat with Models
-
-Chat with AI models by using the `/chat` command followed by your message.
-
-### 💬 Chat with Embeddings
-
-For more advanced chat capabilities, use the `/chat_with_files` command followed by your message.
-
-## 📁 File Management
+📁 File Management:
 
 The chatbot can handle various file types, such as PDF and TXT documents, for summarization and conversation.
 
-## 🆘 Support
-
+🆘 Support:
 If you encounter any issues or have questions, feel free to [create an issue](https://github.com/CPU_AI_Telegram-Messange/issues) or [contact us](mailto:bonnie.dido@gmail.com).
 
-## 📄 License
+📄 License:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
