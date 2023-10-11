@@ -10,12 +10,12 @@ These instructions will help you set up and run the AI chatbot on your system.
 
 ### Prerequisites
 
-Before you begin, make sure you have Python 3.x and is suggested 3.10 installed on your system. You will also need to install the required Python packages. To install them, run the following command: `pip install -r requirements.txt`
+Before you begin, make sure you have Python 3.x and is suggested 3.10 installed on your system. You will also need to install the required Python packages. To install them, run the following command: `pip install -r requirements.txt`.
 
 
 ### Running the Chatbot
 
-To start the chatbot, use the following command: `python chatbot.py`
+To start the chatbot, use the following command `python chatbot.py`.
 
 ## 💡 Functionalities
 
