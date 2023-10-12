@@ -56,7 +56,7 @@ If you don't already have one, create a Telegram account.
 ## Step 2: Open Telegram and Search for BotFather
 
 - Open the Telegram app.
-- In the search bar at the top, type "BotFather."
+- In the search bar at the top, type `BotFather.`
 - You will see a user with the name "BotFather" and a blue checkmark. This is the official Telegram bot for creating other bots.
 
 ## Step 3: Start a Chat with BotFather
@@ -66,7 +66,7 @@ If you don't already have one, create a Telegram account.
 
 ## Step 4: Create a New Bot
 
-- To create a new bot, send the command "/newbot" to BotFather.
+- To create a new bot, send the command `/newbot` to BotFather.
 
 ## Step 5: Choose a Name and Username
 
@@ -92,7 +92,7 @@ Feel free to use this guide in your GitHub README to help others create their Te
 
 ### Download LLM
 
-To download the model the code will automatically start to download them from the gpt4all and TTS github, they OCCUPY MUCH SPACE, so # out some links of site, infact the most heavy files are the llms models and all of them are 69gb while the tts model only 357mb This is the python file `download.py`.
+To download the model the code will automatically start to download them from the gpt4all and TTS github when the `python chatbot.py` file is started but, they OCCUPY MUCH SPACE, so # out some links of site, infact the most heavy files are the llms models and all of them are 69gb while the tts model only 357mb This is the python file `download.py`.
 
 Here is the code to download only the most important model:
 `
@@ -124,28 +124,28 @@ To start the chatbot, use the following command `python chatbot.py`.
 You can convert text into lifelike speech using the `/tts` command. Customize the voice by choosing the language and speaker.
 
 💬 Chat Command:
-To chat with the bot, use the "/chat" command followed by your message. For instance, you can send "/chat what is Wikipedia?" to start a chat with the bot. You can also send PDF or TXT documents to the bot for discussion; it will process them and respond to your questions. To chat with files, use the "/chat_with_files" command followed by a question related to the files.
+To chat with the bot, use the `/chat` command followed by your message. For instance, you can send `/chat what is Wikipedia?` to start a chat with the bot. You can also send PDF or TXT documents to the bot for discussion; it will process them and respond to your questions. To chat with files, use the `/chat_with_files` command followed by a question related to the files.
 
 📃 Summarize Text Command:
-Use the "/summarize_text" command to summarize text. Specify the minimum and maximum percentage of the summary along with the text you want to summarize.
+Use the `/summarize_text` command to summarize text. Specify the minimum and maximum percentage of the summary along with the text you want to summarize.
 
 🎙️ Summarize Audio Command:
-The "/summarize_audio" command allows you to transcribe and summarize audio files. Provide the file name, language, and desired summary percentage.
+The `/summarize_audio` command allows you to transcribe and summarize audio files. Provide the file name, language, and desired summary percentage.
 
 📺 Summarize YouTube Video Command:
-Summarize YouTube videos with the "/summarize_yt_video" command. Provide the video link, language, and summary percentages.
+Summarize YouTube videos with the `/summarize_yt_video` command. Provide the video link, language, and summary percentages.
 
 🎙️ Speech Enhancement Command:
-Improve audio quality by uploading your audio file and using the "/speech_enhancement" command.
+Improve audio quality by uploading your audio file and using the `/speech_enhancement` command.
 
 🗑️ Clean Files Command:
-Use the "/clean_files" command to remove files you've sent to the bot.
+Use the `/clean_files` command to remove files you've sent to the bot.
 
 🤖 Chat with Models:
 Chat with AI models by using the "/chat" command followed by your message.
 
 💬 Chat with Embeddings:
-For more advanced chat capabilities, use the "/chat_with_files" command followed by your message.
+For more advanced chat capabilities, use the `/chat_with_files` command followed by your message.
 
 📁 File Management:
 
