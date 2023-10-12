@@ -4,6 +4,32 @@
 
 This is a versatile AI chatbot with various functionalities, including text-to-speech, chat capabilities, summarization of text, audio, and YouTube videos, speech enhancement, and more. You can use this bot to interact with AI models and perform various tasks.
 
+## 📚 Citations and Special Thanks
+
+We would like to express our gratitude to the creators and contributors of the following repositories and models, which have greatly enhanced the functionality of this project. 🙏
+
+- [nomic-ai/gpt4all](https://github.com/nomic-ai/gpt4all): 🧠 State-of-the-art AI models.
+  - We would like to thank the Nomic AI team for their pioneering work in the field of AI models. This project benefits from their groundbreaking research and contributions.
+
+- [openai/whisper-large-v2](https://huggingface.co/openai/whisper-large-v2): 🎙️ OpenAI's Whisper for speech recognition.
+  - Our chatbot leverages OpenAI's Whisper model for accurate and reliable speech recognition. We extend our appreciation to OpenAI for their invaluable resource.
+
+- [snakers4/silero-models](https://github.com/snakers4/silero-models): 🗣️ Silero's multilingual ASR models.
+  - Special thanks to the Silero team for developing multilingual ASR models that enhance our chatbot's speech processing capabilities.
+
+- [facebook/bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn): 📰 Facebook's BART for summarization.
+  - We are indebted to Facebook for their BART model, which enables the chatbot to summarize text and news articles effectively.
+
+- [imartinez/privateGPT](https://github.com/imartinez/privateGPT): 🔐 Private and secure AI models.
+  - We extend our appreciation to imartinez for their work on private AI models. This project benefits from their commitment to user privacy and security.
+
+We are grateful to these creators and organizations for making their resources available to the open-source community, enriching the capabilities of our AI chatbot. Without their contributions, this project would not be as powerful and versatile as it is today. 🌟
+
+Please consider exploring these repositories and models to learn more about their individual features and benefits. Feel free to contribute to their development and show your support for the open-source community.
+
+Do note that each repository or model may have its own licensing terms and requirements, so make sure to review and comply with their respective licenses.
+
+
 ## 🚀 Getting Started
 
 These instructions will help you set up and run the AI chatbot on your system.
