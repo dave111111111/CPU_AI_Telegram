@@ -8,6 +8,10 @@ This is a versatile AI chatbot with various functionalities, including text-to-s
 
 These instructions will help you set up and run the AI chatbot on your system.
 
+### Download Git
+
+Before you start, make sure you have Git installed on your system. If you don't have it, you can download Git from the official website: [Download Git](https://git-scm.com/downloads)🔧.
+
 ### Prerequisites
 
 Before you begin, make sure you have Python 3.x (suggested 3.10) installed on your system. You will also need to install the required Python packages. To install them, run the following command: `pip install -r requirements.txt`.
@@ -60,9 +64,26 @@ Feel free to use this guide in your GitHub README to help others create their Te
 
 ### Download LLM
 
-To download the model the code will automatically start to download them from the gpt4all and TTS github, they OCCUPY MUCH SPACE, so # out some links of site, infact the most heavy files are the llms models This is the python file `download.py`.
+To download the model the code will automatically start to download them from the gpt4all and TTS github, they OCCUPY MUCH SPACE, so # out some links of site, infact the most heavy files are the llms models and all of them are 69gb while the tts model only 357mb This is the python file `download.py`.
 
-
+Here is the code to download only the most important model:
+`
+    gpt4all_urls  = [
+        "https://gpt4all.io/models/wizardlm-13b-v1.1-superhot-8k.ggmlv3.q4_0.bin",
+        "https://huggingface.co/nomic-ai/gpt4all-falcon-ggml/resolve/main/ggml-model-gpt4all-falcon-q4_0.bin",
+        "https://huggingface.co/TheBloke/Nous-Hermes-13B-GGML/resolve/main/nous-hermes-13b.ggmlv3.q4_0.bin",
+        "https://huggingface.co/TheBloke/GPT4All-13B-snoozy-GGML/resolve/main/GPT4All-13B-snoozy.ggmlv3.q4_0.bin",
+        "https://huggingface.co/TheBloke/orca_mini_7B-GGML/resolve/main/orca-mini-7b.ggmlv3.q4_0.bin",
+        "https://huggingface.co/TheBloke/orca_mini_3B-GGML/resolve/main/orca-mini-3b.ggmlv3.q4_0.bin",
+        "https://huggingface.co/TheBloke/orca_mini_13B-GGML/resolve/main/orca-mini-13b.ggmlv3.q4_0.bin",
+        "https://huggingface.co/TheBloke/WizardLM-13B-Uncensored-GGML/resolve/main/wizardLM-13B-Uncensored.ggmlv3.q4_0.bin",
+        "https://huggingface.co/nomic-ai/ggml-replit-code-v1-3b/resolve/main/ggml-replit-code-v1-3b.bin",
+        "https://gpt4all.io/models/ggml-all-MiniLM-L6-v2-f16.bin",
+        "https://gpt4all.io/models/starcoderbase-3b-ggml.bin",
+        "https://gpt4all.io/models/starcoderbase-7b-ggml.bin",
+        "https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/resolve/main/llama-2-7b-chat.ggmlv3.q4_0.bin"
+    ]
+`
 ### Running the Chatbot
 
 To start the chatbot, use the following command `python chatbot.py`.
