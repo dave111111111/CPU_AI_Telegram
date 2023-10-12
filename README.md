@@ -116,6 +116,47 @@ Here is the code to download only the most important model:
 
 These are the model you can use and these are the benchmarks:
 
+# Model Selection for Your Project
+
+Choosing the right model is a crucial decision for your project. It determines the capabilities and functionality of your application. In this README, we'll help you understand the rationale behind selecting a model that aligns with your project's goals.
+
+## Model Options
+
+### BoolQ
+- **Use for:** Yes/No question-answering tasks.
+- **Rationale:** BoolQ excels at simple binary classification based on text input. Ideal for straightforward natural language understanding tasks.
+
+### PIQA
+- **Use for:** Visual question-answering tasks, especially those involving images.
+- **Rationale:** PIQA is designed to evaluate models on questions related to visual information, such as images or scenes.
+
+### HellaSwag
+- **Use for:** Tasks requiring complex commonsense reasoning and world knowledge.
+- **Rationale:** HellaSwag presents a challenge for models to exhibit advanced reasoning capabilities.
+
+### WinoGrande
+- **Use for:** Coreference resolution and handling ambiguous pronouns in text.
+- **Rationale:** WinoGrande focuses on specific aspects of natural language understanding related to coreference.
+
+### ARC-e and ARC-c
+- **Use ARC-e for:** Scientific reasoning tasks.
+- **Use ARC-c for:** General knowledge-based tasks.
+- **Rationale:** Choose the appropriate subset based on the domain of your project.
+
+### OBQA
+- **Use for:** Comprehension of elementary school textbook passages and questions.
+- **Rationale:** Ideal for educational or text-based tasks.
+
+### Avg
+- **Use for:** Summarizing model performance across multiple tasks or datasets.
+- **Rationale:** Useful for presenting an overall evaluation of models in various contexts.
+
+## Making the Right Choice
+
+Select a model that aligns with your project's primary objectives. Your choice will significantly impact the functionality and capabilities of your application. Carefully assess your project's requirements and goals to make an informed decision.
+
+Feel free to explore the models mentioned above and their specific use cases. Understanding their strengths will help you choose the model that best suits your project's needs.
+
 ![LLM Benchmarks](images/Performance_Benchmarks.png)
 
 ### Running the Chatbot
