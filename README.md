@@ -112,6 +112,10 @@ Here is the code to download only the most important model:
     ]
 `
 
+### Value your model
+
+These are the model you can use and these are the benchmarks:
+
 ![LLM Benchmarks](images/Performance_Benchmarks.png)
 
 ### Running the Chatbot
