@@ -12,6 +12,7 @@ These instructions will help you set up and run the AI chatbot on your system.
 
 Before you begin, make sure you have Python 3.x (suggested 3.10) installed on your system. You will also need to install the required Python packages. To install them, run the following command: `pip install -r requirements.txt`.
 
+
 # How to Create a Telegram Bot and Obtain the Token
 
 Follow these steps to create a Telegram bot and obtain the token necessary for your bot development:
@@ -56,9 +57,16 @@ And that's it! You've created a Telegram bot and obtained the token to use in yo
 
 Feel free to use this guide in your GitHub README to help others create their Telegram bots and obtain API tokens.
 
+
+### Download LLM
+
+To download the model the code will automatically start to download them from the gpt4all and TTS github, they OCCUPY MUCH SPACE, so # out some links of site, infact the most heavy files are the llms models This is the python file `download.py`.
+
+
 ### Running the Chatbot
 
 To start the chatbot, use the following command `python chatbot.py`.
+
 
 ## 💡 Functionalities
 
