@@ -4,7 +4,7 @@
 
 This is a versatile AI chatbot with various functionalities, including text-to-speech, chat capabilities, summarization of text, audio, and YouTube videos, speech enhancement, and more. You can use this bot to interact with AI models and perform various tasks.
 
-## 📚 Citations and Special Thanks
+### 📚 Citations and Special Thanks
 
 We would like to express our gratitude to the creators and contributors of the following repositories and models, which have greatly enhanced the functionality of this project. 🙏
 
