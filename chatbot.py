@@ -2,6 +2,7 @@ import logging
 import time
 import os
 import shutil
+from download import download_models
 from text_to_speech import audio
 from transcribe import Transcribe_main
 from integration import subprocess_running, questions
@@ -23,6 +24,8 @@ from telegram.ext import (
 WAITING_FOR_INPUT = 1
 WAITING_FOR_CHAT = 1
 WAITING_FOR_TTS = 2
+
+download_models()
 
 # Define language and speaker options
 language_keyboards = [
@@ -325,35 +328,34 @@ async def start(update: Update, context: CallbackContext) -> None:
 
     introduction_message = (
 """
-Start Command:
+📊 Polls Command:
+With the "/polls" command, you can initiate the text-to-speech (TTS) process and engage in a chat with the bot. For example, you can send "/polls" to start the process.
 
-To initiate the bot, simply send the "/start" command to it.
-🚀 This command provides an introduction to the bot's capabilities.
-Chat Command:
+💬 Chat Command:
+To chat with the bot, use the "/chat" command followed by your message. For instance, you can send "/chat what is Wikipedia?" to start a chat with the bot. You can also send PDF or TXT documents to the bot for discussion; it will process them and respond to your questions. To chat with files, use the "/chat_with_files" command followed by a question related to the files.
 
-To engage in a chat conversation with the bot, use the "/chat" command followed by your message.
-For example, send "/chat what is wikipedia?" to start a chat with the bot.
-The bot will respond to your message.  Note if you want to chat with the bot on pdf or txt documents, just send them to the bot it will process them. After ask questions as usual on the argument of the pdfs and you will receive a response. 
-If you want to chat with the files do a /chat_with_files <question related to the files>
+📃 Summarize Files Command:
+Use the "/file_summarize" command followed by the name of a file previously sent to the bot, along with the minimum and maximum percentage of the summary. For example, you can use "/file_summarize "Research_paper.pdf" 30 70" to summarize a document.
 
-file_summarize:
-Use the command /summarize file <name of the file you uploaded> <minimum number of words of summary> <maximum number of words of summary>
+📃 Summarize Text Command:
+To summarize text, use the "/summarize_text" command, specifying the minimum and maximum percentage of the summary, along with the text you want to summarize. For instance, you can send "/summarize_text 20 50" followed by your text.
 
-summarize_text:
-Use the command /summarize_text <minimum number of words of summary> <maximum number of words of summary> <text to summarize>
+🎙️ Summarize Audio Command:
+For audio summarization, use the "summarize_audio" command. Provide the name of the audio file you've uploaded, the language, and the desired range for the summary percentage. For example, send "/summarize_audio "audio_file.mp3" en 20 70".
 
-speech enhancement:
-upload your audio file to enhance and then run the command /speech_enhancement <name of the audio file, you uploaded>
+📺 Summarize YouTube Video Command:
+To summarize a YouTube video, use the "summarize_yt_video" command. Include the link to the video, the language, and the minimum and maximum percentages for the summary. For example, send "/summarize_yt_video "https://youtube.com/your_video" en 10 40".
 
-clean_files:
-use the command /clean_files to remove the files you sent to the bot.
+🎙️ Speech Enhancement Command:
+You can enhance audio quality by uploading your audio file and using the "/speech_enhancement" command, followed by the name of the uploaded audio file. For example, send "/speech_enhancement "enhance_audio.wav".
 
-Text-to-Speech (TTS) Command:
-To convert text into speech first you need to start the bot with /polls select TTS and do the polling and to choose the prompt of the Text to speech, use the "/tts" command followed by your text.
-You need to follow the specified steps to choose a language and a speaker, as explained in the introduction message.
-For example, send "/tts Hello, how are you?" to start the TTS process.
+🗑️ Clean Files Command:
+To remove files you've sent to the bot, use the "/clean_files" command. For example, you can send "/clean_files" to clear your workspace.
 
-❌ Please note that while using the bot it will be slow because it is not perfect, follow the prompts and options provided by the bot for a smooth experience. You can interact with the bot by sending the appropriate commands and following the steps outlined in the introduction message. 🤖👍"""
+🔊 Text-to-Speech (TTS) Command:
+If you'd like to convert text into speech, start with the "/polls" command, select TTS, and follow the prompts to choose a language and speaker. Once configured, use the "/tts" command followed by your text. For example, send "/tts "Hello, how are you?" to initiate the TTS process.
+
+Enjoy using these commands! 👍"""
     )
 
     await update.message.reply_text(introduction_message)
@@ -442,6 +444,8 @@ async def speech_enhancer(update: Update, context: CallbackContext):
         await update.message.reply_text("Enhancing your audio_file...🗣️")
         enhance_speech(mp3_file=path)
         await update.message.reply_audio(audio=open("enhanced.wav", 'rb'))
+        os.remove("enhanced.wav")
+
     else:
         await update.message.reply_text("Invalid command. Please use '/speech_enhancement filename' format.")
 
