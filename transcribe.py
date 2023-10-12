@@ -10,18 +10,9 @@ def remove_audio_chunk_files(folder_name):
         file_path = os.path.join(folder_name, filename)
         if os.path.isfile(file_path):
             os.remove(file_path)
-            
-# Function to remove audio chunk files
-def remove_tran_sum(folder_name):
-    for filename in os.listdir(folder_name):
-        file_path = os.path.join(folder_name, filename)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
 
 if os.path.exists("Transcription and Summarization") == False:
     os.mkdir("Transcription and Summarization")
-else:
-    remove_audio_chunk_files("Transcription and Summarization")
 
 # Check if the "audio-chunk" directory exists, and if it does, remove its contents
 if os.path.exists("audio-chunks"):
@@ -34,7 +25,7 @@ def convert_to_wav(input_path, output_path):
     audio.export(output_path, format="wav")
 
 # Function to transcribe audio chunk by chunk
-def transcribe_audio_chunk(audio_chunk, language, model_name="large"):
+def transcribe_audio_chunk(audio_chunk, language, model_name="large-v2"):
     # Load the Whisper model
     model = whisper.load_model(model_name)
 
@@ -79,8 +70,16 @@ def Transcribe_main(input_path, language):
         silence_thresh=sound.dBFS - 14,
         keep_silence=500
     )
+
     transcription = ""
     combined_chunk = ""
+    
+    # Check if there's an existing transcription and load it
+    existing_transcription = ""
+    if os.path.exists("./Transcription and Summarization/Transcription_with_timestamps.txt"):
+        with open("./Transcription and Summarization/Transcription_with_timestamps.txt", "r") as file:
+            existing_transcription = file.read()
+
     # Iterate through the audio chunks, starting from the last successfully transcribed chunk
     for i, audio_chunk in enumerate(chunks, start=1):
         if i <= last_chunk_number:
@@ -92,9 +91,8 @@ def Transcribe_main(input_path, language):
         # Transcribe the current chunk
         text = transcribe_audio_chunk(chunk_filename, language=f"{language}")
 
-        # Append the chunk's text with timestamps to the full transcription
-        with open("./Transcription and Summarization/Transcription_with_timestamps.txt", "a") as file:
-            file.write(f"[{i}:00] {text}\n")  # Add a newline to separate chunks
+        with open('./Transcription and Summarization/Transcription_with_timestamps.txt', 'a', encoding='utf-8') as file:
+            file.write(f"[{i}:00] {text}\n")
 
         # Combine short chunks with the previous one
         if len(text.split()) <= 16:  # Adjust the word count threshold as needed
@@ -102,7 +100,6 @@ def Transcribe_main(input_path, language):
         else:
             transcription += combined_chunk
             combined_chunk = text + ' '
-        print(chunk_filename, ":", text)
 
     # Add the remaining combined chunk
     transcription += combined_chunk
@@ -111,6 +108,10 @@ def Transcribe_main(input_path, language):
 
     # Capitalize the first letter at the start of sentences
     text_with_capitalized_start = re.sub(r'(?<=[.!?])\s*([a-z])', lambda x: x.group(1).upper(), text_without_double_periods)
-    return text_with_capitalized_start
 
-#transcription = Transcribe_main(input_path="TTS.wav")
+    # Append the new transcription to the existing one
+    final_transcription = existing_transcription + text_with_capitalized_start
+    os.remove("output.wav")
+    return final_transcription
+
+transcription = Transcribe_main(input_path=r"D:\Coding\CPU_AI_Telegram\yt_download_audio\Imperialism Crash Course World History 35.mp4", language="en")

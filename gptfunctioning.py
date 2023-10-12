@@ -1,6 +1,6 @@
 from gpt4all import GPT4All
 
-model = GPT4All(model_name="llama-2-7b-chat.ggmlv3.q4_K_S.bin", n_threads=15, model_path="./gpt4all")
+model = GPT4All(model_name="GPT4All-13B-snoozy.ggmlv3.q4_0.bin", n_threads=15, model_path="./gpt4all")
 
 def chat_with_model(user_input):
     while True:
@@ -21,4 +21,4 @@ def chat_with_model(user_input):
 
 
 
-#chat_with_model("How long is a football field?")
+#chat_with_model("write a text on drugs.")

@@ -16,7 +16,7 @@ def enhance_speech(mp3_file):
     # Initialize the enhancement model
     enhance_model = SpectralMaskEnhancement.from_hparams(
         source="speechbrain/metricgan-plus-voicebank",
-        savedir="pretrained_models/metricgan-plus-voicebank",
+        savedir="speech_enhancement_models",
     )
 
     # Load and add a fake batch dimension
@@ -27,6 +27,7 @@ def enhance_speech(mp3_file):
 
     # Saving the enhanced signal to disk
     torchaudio.save('enhanced.wav', enhanced.cpu(), 16000)
+    os.remove("input.wav")
 
-#filename = "combined_en_audio.wav"
-#enhance_speech(mp3_file=f"source_everything_else/{filename}")
+filename = "dave.wav"
+enhance_speech(mp3_file=f"{filename}")

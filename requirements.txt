@@ -1,10 +1,10 @@
 pytube == 15.0.0
 pydub == 0.25.1
 whisper == 1.1.10
-torch == 1.12.1+cu116
+torch == 2.1.0
 chunkipy == 0.0.3
 transformers == 4.33.3
-torchaudio == 0.12.1+cu116
+torchaudio == 2.1.0
 speechbrain == 0.5.15
 langchain == 0.0.300
 chromadb == 0.4.12
@@ -17,5 +17,5 @@ python-telegram-bot == 20.5
 llama-cpp-python==0.1.81
 sentence_transformers==2.2.2
 python-dotenv==1.0.0
-
-
+torchvision == 0.16.0
+pillow == 9.0.1
