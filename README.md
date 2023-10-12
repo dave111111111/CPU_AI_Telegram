@@ -112,7 +112,7 @@ Here is the code to download only the most important model:
     ]
 `
 
-![LLM Benchmarks](images/llm_benchmarks.png)
+![LLM Benchmarks](images/Performance_Benchmarks.png)
 
 ### Running the Chatbot
 
