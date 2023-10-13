@@ -85,7 +85,10 @@ def Transcribe_main(input_path, language):
         if i <= last_chunk_number:
             continue  # Skip already transcribed chunks
 
-        chunk_filename = os.path.join(folder_name, f"chunk{i}.wav")
+        if i == len(chunks):
+            chunk_filename = os.path.join(folder_name, "Finished.wav")
+        else:
+            chunk_filename = os.path.join(folder_name, f"chunk{i}.wav")
         audio_chunk.export(chunk_filename, format="wav")
 
         # Transcribe the current chunk
@@ -114,4 +117,4 @@ def Transcribe_main(input_path, language):
     os.remove("output.wav")
     return final_transcription
 
-transcription = Transcribe_main(input_path=r"D:\Coding\CPU_AI_Telegram\yt_download_audio\Imperialism Crash Course World History 35.mp4", language="en")
+#transcription = Transcribe_main(input_path=r"D:\Coding\CPU_AI_Telegram\yt_download_audio\Imperialism Crash Course World History 35.mp4", language="en")
