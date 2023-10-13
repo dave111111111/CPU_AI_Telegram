@@ -2,6 +2,7 @@
 
 **AI Chatbot with Multifunctionalities**
 
+🚨HERE WE GO.
 This is a versatile AI chatbot with various functionalities, including text-to-speech, chat capabilities, summarization of text, audio, and YouTube videos, speech enhancement, and more. You can use this bot to interact with AI models and perform various tasks. This code needs to work with wifi and telegram, but every model works offline so I hope to create an offline alternative. Everything runs on cpu but it can run on gpu with a few adjustments.
 NOTE: If you want to correct and optimize the code or add implementation please do I would appreciate very much, contact me if you do so we can add it to this repository.😊 Please If you want to integrate something make it so it is not dependant on api's or services that cost. Help me implement a way so the ai can search the web and give accurate response based on internet results.🌐
 
