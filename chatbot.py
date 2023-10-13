@@ -5,7 +5,7 @@ import shutil
 from download import download_models
 from text_to_speech import audio
 from transcribe import Transcribe_main
-from integration import subprocess_running, questions
+from privateGPT import subprocess_running, main_embeddings_question
 from file_summarizer import read_text_or_pdf_file
 from summarizer import summarize_main
 from yt_download_transcription_summarization import yt_download_Transcribe, yt_download_main
@@ -529,10 +529,10 @@ async def summarize_yt_video(update: Update, context: CallbackContext):
     user_language = command_parts[2]
     min_percentage = int(command_parts[3])
     max_percentage = int(command_parts[4])
-    
+    await update.message.reply_text("Downloading Video, Transcribing and summarizing...")
     transcription = yt_download_Transcribe(video_url=url_video, user_language=user_language)
-    await update.message.reply_text(f"Transcription: {transcription}")
     summary = yt_download_main(transcription=transcription, min_percentage=min_percentage, max_percentage=max_percentage)
+    await update.message.reply_text(f"Transcription: {transcription}")
     await update.message.reply_text(f"Summary: {summary}")
 
 async def file_summarize(update: Update, context: CallbackContext):
@@ -623,23 +623,23 @@ async def downloader(update: Update, context: CallbackContext):
 async def clean_files(update: Update, context: CallbackContext) -> None:
     try:
         
-        directory_path = 'source_documents'
+        directory_path_1 = 'source_documents'
 
-        if os.path.exists(directory_path):
+        if os.path.exists(directory_path_1):
 
             # List all files in the directory
-            files = os.listdir(directory_path)
+            files = os.listdir(directory_path_1)
 
             # Iterate through the files and remove them
             for file in files:
-                file_path = os.path.join(directory_path, file)
+                file_path = os.path.join(directory_path_1, file)
                 if os.path.isfile(file_path):
                     os.remove(file_path)
 
             # Send a success message to the user
             await update.message.reply_text("All files in 'source_documents' directory have been successfully removed.")
         else:
-            print(f"Directory '{directory_path}' does not exist.")
+            print(f"Directory '{directory_path_1}' does not exist.")
             await update.message.reply_text("There are no Files to remove")
 
     except Exception as e:
@@ -711,7 +711,7 @@ async def Chat_with_embeddings(update: Update, context: CallbackContext) -> None
     # Extract the text after "/chat " and assign it to user_message
     user_message = user_message[len("/chat_with_files "):].strip()
     # Process chat input
-    model_reply = questions(query=user_message)
+    model_reply = main_embeddings_question(question=user_message)
     await update.message.reply_text(model_reply)
 
     end_time = time.time()  # Record the end time
