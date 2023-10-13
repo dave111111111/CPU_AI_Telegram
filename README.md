@@ -118,10 +118,6 @@ Here is the code to download only the most important model:
     ]
 `
 
-### Value your model
-
-These are the model you can use and these are the benchmarks:
-
 # Model Selection for Your Project
 
 Choosing the right model is a crucial decision for your project. It determines the capabilities and functionality of your application. In this README, we'll help you understand the rationale behind selecting a model that aligns with your project's goals.
@@ -157,7 +153,7 @@ Choosing the right model is a crucial decision for your project. It determines t
 - **Use for:** Summarizing model performance across multiple tasks or datasets.
 - **Rationale:** Useful for presenting an overall evaluation of models in various contexts.
 
-## Making the Right Choice
+### Value your model
 
 Select a model that aligns with your project's primary objectives. Your choice will significantly impact the functionality and capabilities of your application. Carefully assess your project's requirements and goals to make an informed decision.
 
@@ -168,7 +164,6 @@ Feel free to explore the models mentioned above and their specific use cases. Un
 ### Running the Chatbot
 
 To start the chatbot, use the following command `python chatbot.py`.
-
 
 ## 💡 Functionalities
 
