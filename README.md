@@ -206,7 +206,7 @@ To remove files you've sent to the bot, use the `/clean_files` command. For exam
 🔊 Text-to-Speech (TTS) Command:
 If you'd like to convert text into speech, start with the `/polls` command, select TTS, and follow the prompts to choose a language and speaker. Once configured, use the `/tts` command followed by your text. For example, send `/tts Hello, how are you?` to initiate the TTS process.
 
-For the speech recognition these are the language extension:
+### Speech transcription abbreviations:
 
 - Afrikaans: af
 - Arabic: ar, Armenian: hy
