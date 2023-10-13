@@ -353,7 +353,7 @@ You can enhance audio quality by uploading your audio file and using the "/speec
 To remove files you've sent to the bot, use the "/clean_files" command. For example, you can send "/clean_files" to clear your workspace.
 
 🔊 Text-to-Speech (TTS) Command:
-If you'd like to convert text into speech, start with the "/polls" command, select TTS, and follow the prompts to choose a language and speaker. Once configured, use the "/tts" command followed by your text. For example, send "/tts "Hello, how are you?" to initiate the TTS process.
+If you'd like to convert text into speech, start with the "/polls" command, select TTS, and follow the prompts to choose a language and speaker. Once configured, use the "/tts" command followed by your text. For example, send "/tts Hello, how are you?" to initiate the TTS process.
 
 Enjoy using these commands! 👍"""
     )
@@ -622,20 +622,25 @@ async def downloader(update: Update, context: CallbackContext):
 
 async def clean_files(update: Update, context: CallbackContext) -> None:
     try:
-        # Replace 'source_documents' with the path to your directory
+        
         directory_path = 'source_documents'
 
-        # List all files in the directory
-        files = os.listdir(directory_path)
+        if os.path.exists(directory_path):
 
-        # Iterate through the files and remove them
-        for file in files:
-            file_path = os.path.join(directory_path, file)
-            if os.path.isfile(file_path):
-                os.remove(file_path)
+            # List all files in the directory
+            files = os.listdir(directory_path)
 
-        # Send a success message to the user
-        await update.message.reply_text("All files in 'source_documents' directory have been successfully removed.")
+            # Iterate through the files and remove them
+            for file in files:
+                file_path = os.path.join(directory_path, file)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+
+            # Send a success message to the user
+            await update.message.reply_text("All files in 'source_documents' directory have been successfully removed.")
+        else:
+            print(f"Directory '{directory_path}' does not exist.")
+            await update.message.reply_text("There are no Files to remove")
 
     except Exception as e:
         # Handle any exceptions that may occur during file removal
@@ -645,18 +650,22 @@ async def clean_files(update: Update, context: CallbackContext) -> None:
     try:
         # Replace 'source_documents' with the path to your directory
         directory_path = 'source_everything_else'
+        
+        if os.path.exists(directory_path):
 
-        # List all files in the directory
-        files = os.listdir(directory_path)
+            # List all files in the directory
+            files = os.listdir(directory_path)
 
-        # Iterate through the files and remove them
-        for file in files:
-            file_path = os.path.join(directory_path, file)
-            if os.path.isfile(file_path):
-                os.remove(file_path)
+            # Iterate through the files and remove them
+            for file in files:
+                file_path = os.path.join(directory_path, file)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
 
-        # Send a success message to the user
-        await update.message.reply_text("All files in 'source_everything_else' directory have been successfully removed.")
+            # Send a success message to the user
+            await update.message.reply_text("All files in 'source_everything_else' directory have been successfully removed.")
+        else:
+            print(f"Directory '{directory_path}' does not exist.")
 
     except Exception as e:
         # Handle any exceptions that may occur during file removal
