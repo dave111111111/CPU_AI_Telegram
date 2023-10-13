@@ -98,7 +98,7 @@ Feel free to use this guide in your GitHub README to help others create their Te
 
 ### Download LLM
 
-To download the model the code will automatically start to download them from the gpt4all and TTS github when the `python chatbot.py` file is started but, they OCCUPY MUCH SPACE, so # out some links of site, infact the most heavy files are the llms models and all of them are 69gb while the tts model only 357mb This is the python file `download.py`.
+To download the model the code will automatically start to download them from the gpt4all and TTS github when the `python chatbot.py` file is started but, they OCCUPY MUCH SPACE, so if you don't have much space # out some links of site, infact the most heavy files are the llms models and all of them are 69gb while the tts model only 357mb This is the python file `download.py`.
 
 Here is the code to download only the most important model:
 `
