@@ -179,30 +179,32 @@ You can convert text into lifelike speech using the `/tts` command. Customize th
 💬 Chat Command:
 To chat with the bot, use the `/chat` command followed by your message. For instance, you can send `/chat what is Wikipedia?` to start a chat with the bot. You can also send PDF or TXT documents to the bot for discussion; it will process them and respond to your questions. To chat with files, use the `/chat_with_files` command followed by a question related to the files.
 
+📊 Polls Command:
+With the `/polls` command, you can initiate the text-to-speech (TTS) process and engage in a chat with the bot. For example, you can send `/polls` to start the process.
+
+💬 Chat Command:
+To chat with the bot, use the `/chat` command followed by your message. For instance, you can send `/chat what is Wikipedia?` to start a chat with the bot. You can also send PDF or TXT documents to the bot for discussion; it will process them and respond to your questions. To chat with files, use the "/chat_with_files" command followed by a question related to the files.
+
+📃 Summarize Files Command:
+Use the `/file_summarize` command followed by the name of a file previously sent to the bot, along with the minimum and maximum percentage of the summary. For example, you can use `/file_summarize "Research_paper.pdf" 30 70` to summarize a document.
+
 📃 Summarize Text Command:
-Use the `/summarize_text` command to summarize text. Specify the minimum and maximum percentage of the summary along with the text you want to summarize.
+To summarize text, use the `/summarize_text` command, specifying the minimum and maximum percentage of the summary, along with the text you want to summarize. For instance, you can send `/summarize_text 20 50" followed by your text`.
 
 🎙️ Summarize Audio Command:
-The `/summarize_audio` command allows you to transcribe and summarize audio files. Provide the file name, language, and desired summary percentage.
+For audio summarization, use the `summarize_audio` command. Provide the name of the audio file you've uploaded, the language, and the desired range for the summary percentage. For example, send `/summarize_audio "audio_file.mp3" en 20 70`.
 
 📺 Summarize YouTube Video Command:
-Summarize YouTube videos with the `/summarize_yt_video` command. Provide the video link, language, and summary percentages.
+To summarize a YouTube video, use the `summarize_yt_video` command. Include the link to the video, the language, and the minimum and maximum percentages for the summary. For example, send `/summarize_yt_video "https://youtube.com/your_video" en 10 40`.
 
 🎙️ Speech Enhancement Command:
-Improve audio quality by uploading your audio file and using the `/speech_enhancement` command.
+You can enhance audio quality by uploading your audio file and using the "/speech_enhancement" command, followed by the name of the uploaded audio file. For example, send `/speech_enhancement "enhance_audio.wav"`.
 
 🗑️ Clean Files Command:
-Use the `/clean_files` command to remove files you've sent to the bot.
+To remove files you've sent to the bot, use the `/clean_files` command. For example, you can send `/clean_files` to clear your workspace.
 
-🤖 Chat with Models:
-Chat with AI models by using the "/chat" command followed by your message.
-
-💬 Chat with Embeddings:
-For more advanced chat capabilities, use the `/chat_with_files` command followed by your message.
-
-📁 File Management:
-
-The chatbot can handle various file types, such as PDF and TXT documents, for summarization and conversation.
+🔊 Text-to-Speech (TTS) Command:
+If you'd like to convert text into speech, start with the `/polls` command, select TTS, and follow the prompts to choose a language and speaker. Once configured, use the `/tts` command followed by your text. For example, send `/tts Hello, how are you?` to initiate the TTS process.
 
 🆘 Support:
 If you encounter any issues or have questions, feel free to [create an issue](https://github.com/CPU_AI_Telegram-Messange/issues) or [contact us](mailto:bonnie.dido@gmail.com).
