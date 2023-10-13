@@ -41,7 +41,13 @@ Before you start, make sure you have Git installed on your system. If you don't 
 
 ### Prerequisites
 
-Before you begin, make sure you have Python 3.x (suggested 3.10) installed on your system. You will also need to install the required Python packages. To install them, run the following command: `pip install -r requirements.txt`.
+- Before you begin, make sure you have Python 3.x (suggested 3.10) installed on your system. 
+
+- `git clone https://github.com/dave111111111/CPU_AI_Telegram.git`
+
+-  cd into the cloned folder`cd CPU_AI_Telegram`
+
+- You will also need to install the required Python packages. To install them, run the following command: `pip install -r requirements.txt`.
 
 
 # How to Create a Telegram Bot and Obtain the Token
