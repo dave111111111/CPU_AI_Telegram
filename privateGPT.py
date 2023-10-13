@@ -8,7 +8,7 @@ from langchain.llms import GPT4All, LlamaCpp
 import chromadb
 import os
 import argparse
-import time
+import subprocess
 
 if not load_dotenv():
     print("Could not load .env file or it is empty. Please check if it exists and is readable.")
@@ -25,50 +25,38 @@ target_source_chunks = int(os.environ.get('TARGET_SOURCE_CHUNKS',4))
 
 from constants import CHROMA_SETTINGS
 
-def main():
-    # Parse the command line arguments
-    args = parse_arguments()
+def ask_question_and_get_answer(question, model_path, model_type, model_n_ctx, model_n_batch, target_source_chunks, embeddings_model_name, persist_directory, args):
     embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
-    chroma_client = chromadb.PersistentClient(settings=CHROMA_SETTINGS , path=persist_directory)
+    chroma_client = chromadb.PersistentClient(settings=CHROMA_SETTINGS, path=persist_directory)
     db = Chroma(persist_directory=persist_directory, embedding_function=embeddings, client_settings=CHROMA_SETTINGS, client=chroma_client)
     retriever = db.as_retriever(search_kwargs={"k": target_source_chunks})
-    # activate/deactivate the streaming StdOut callback for LLMs
+    
+    # Activate/deactivate the streaming StdOut callback for LLMs
     callbacks = [] if args.mute_stream else [StreamingStdOutCallbackHandler()]
+    
     # Prepare the LLM
-    match model_type:
-        case "LlamaCpp":
-            llm = LlamaCpp(model_path=model_path, max_tokens=model_n_ctx, n_batch=model_n_batch, callbacks=callbacks, verbose=False)
-        case "GPT4All":
-            llm = GPT4All(model=model_path, max_tokens=model_n_ctx, backend='gptj', n_batch=model_n_batch, callbacks=callbacks, verbose=False)
-        case _default:
-            # raise exception if model_type is not supported
-            raise Exception(f"Model type {model_type} is not supported. Please choose one of the following: LlamaCpp, GPT4All")
+    if model_type == "LlamaCpp":
+        llm = LlamaCpp(model_path=model_path, max_tokens=model_n_ctx, n_batch=model_n_batch, callbacks=callbacks, verbose=False)
+    elif model_type == "GPT4All":
+        llm = GPT4All(model=model_path, max_tokens=model_n_ctx, backend='gptj', n_batch=model_n_batch, callbacks=callbacks, verbose=False)
+    else:
+        raise Exception(f"Model type {model_type} is not supported. Please choose one of the following: LlamaCpp, GPT4All")
 
-    qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, return_source_documents= not args.hide_source)
-    # Interactive questions and answers
-    while True:
-        query = input("\nEnter a query: ")
-        if query == "exit":
-            break
-        if query.strip() == "":
-            continue
+    qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, return_source_documents=not args.hide_source)
 
-        # Get the answer from the chain
-        start = time.time()
-        res = qa(query)
-        answer, docs = res['result'], [] if args.hide_source else res['source_documents']
-        end = time.time()
+    # Get the answer for the provided question
+    res = qa(question)
+    answer = res['result']
+    documents = res['source_documents'] if not args.hide_source else []
 
-        # Print the result
-        print("\n\n> Question:")
-        print(query)
-        print(f"\n> Answer (took {round(end - start, 2)} s.):")
-        print(answer)
+    if not args.hide_source:
+        relevant_sources = []
+        for document in documents:
+            source_text = f"Source: {document.metadata['source']}\n{document.page_content}"
+            if source_text not in relevant_sources:
+                relevant_sources.append(source_text)
 
-        # Print the relevant sources used for the answer
-        for document in docs:
-            print("\n> " + document.metadata["source"] + ":")
-            print(document.page_content)
+    return answer, relevant_sources
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='privateGPT: Ask questions to your documents without an internet connection, '
@@ -82,6 +70,34 @@ def parse_arguments():
 
     return parser.parse_args()
 
+args = parse_arguments()
 
-if __name__ == "__main__":
-    main()
+def subprocess_running():
+
+    # Path to the Python script
+    script_path = r"ingest.py"
+
+    # Run the script in the user's terminal
+    process = subprocess.Popen(['python', script_path], shell=True)
+
+    # Wait for the script to finish
+    process.wait()
+
+def main_embeddings_question(question):
+
+    subprocess_running()
+    answer, sources = ask_question_and_get_answer(question, model_path, model_type, model_n_ctx, model_n_batch, target_source_chunks, embeddings_model_name, persist_directory, args)
+
+    combined_result = f"\n> Question:\n{question}\n\n> Answer:\n{answer}"
+
+    if not args.hide_source:
+        combined_result += "\n\n> Relevant Sources:\n" + "\n".join(sources)
+
+    print(combined_result)
+    return combined_result
+
+
+
+#question = "How long is a football pitch?"  # Provide your question
+
+#main_embeddings_question(question)

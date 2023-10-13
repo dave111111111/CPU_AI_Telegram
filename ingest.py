@@ -7,17 +7,10 @@ from multiprocessing import Pool
 from tqdm import tqdm
 
 from langchain.document_loaders import (
-    CSVLoader,
-    EverNoteLoader,
     PyMuPDFLoader,
     TextLoader,
     UnstructuredEmailLoader,
-    UnstructuredEPubLoader,
-    UnstructuredHTMLLoader,
-    UnstructuredMarkdownLoader,
-    UnstructuredODTLoader,
-    UnstructuredPowerPointLoader,
-    UnstructuredWordDocumentLoader,
+
 )
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -31,8 +24,9 @@ if not load_dotenv():
 
 from constants import CHROMA_SETTINGS
 import chromadb
+from chromadb.api.segment import API
 
-# Load environment variables
+# Load environment variables
 persist_directory = os.environ.get('PERSIST_DIRECTORY')
 source_directory = os.environ.get('SOURCE_DIRECTORY', 'source_documents')
 embeddings_model_name = os.environ.get('EMBEDDINGS_MODEL_NAME')
@@ -65,19 +59,7 @@ class MyElmLoader(UnstructuredEmailLoader):
 
 # Map file extensions to document loaders and their arguments
 LOADER_MAPPING = {
-    ".csv": (CSVLoader, {}),
-    # ".docx": (Docx2txtLoader, {}),
-    ".doc": (UnstructuredWordDocumentLoader, {}),
-    ".docx": (UnstructuredWordDocumentLoader, {}),
-    ".enex": (EverNoteLoader, {}),
-    ".eml": (MyElmLoader, {}),
-    ".epub": (UnstructuredEPubLoader, {}),
-    ".html": (UnstructuredHTMLLoader, {}),
-    ".md": (UnstructuredMarkdownLoader, {}),
-    ".odt": (UnstructuredODTLoader, {}),
     ".pdf": (PyMuPDFLoader, {}),
-    ".ppt": (UnstructuredPowerPointLoader, {}),
-    ".pptx": (UnstructuredPowerPointLoader, {}),
     ".txt": (TextLoader, {"encoding": "utf8"}),
     # Add more mappings for other file extensions and loaders as needed
 }
@@ -126,9 +108,19 @@ def process_documents(ignored_files: List[str] = []) -> List[Document]:
         exit(0)
     print(f"Loaded {len(documents)} new documents from {source_directory}")
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    texts = text_splitter.split_documents(documents)
-    print(f"Split into {len(texts)} chunks of text (max. {chunk_size} tokens each)")
-    return texts
+    documents = text_splitter.split_documents(documents)
+    print(f"Split into {len(documents)} chunks of text (max. {chunk_size} tokens each)")
+    return documents
+
+def batch_chromadb_insertions(chroma_client: API, documents: List[Document]) -> List[Document]:
+    """
+    Split the total documents to be inserted into batches of documents that the local chroma client can process
+    """
+    # Get max batch size.
+    max_batch_size = chroma_client.max_batch_size
+    for i in range(0, len(documents), max_batch_size):
+        yield documents[i:i + max_batch_size]
+
 
 def does_vectorstore_exist(persist_directory: str, embeddings: HuggingFaceEmbeddings) -> bool:
     """
@@ -150,17 +142,22 @@ def main():
         print(f"Appending to existing vectorstore at {persist_directory}")
         db = Chroma(persist_directory=persist_directory, embedding_function=embeddings, client_settings=CHROMA_SETTINGS, client=chroma_client)
         collection = db.get()
-        texts = process_documents([metadata['source'] for metadata in collection['metadatas']])
+        documents = process_documents([metadata['source'] for metadata in collection['metadatas']])
         print(f"Creating embeddings. May take some minutes...")
-        db.add_documents(texts)
+        for batched_chromadb_insertion in batch_chromadb_insertions(chroma_client, documents):
+            db.add_documents(batched_chromadb_insertion)
     else:
         # Create and store locally vectorstore
         print("Creating new vectorstore")
-        texts = process_documents()
+        documents = process_documents()
         print(f"Creating embeddings. May take some minutes...")
-        db = Chroma.from_documents(texts, embeddings, persist_directory=persist_directory, client_settings=CHROMA_SETTINGS, client=chroma_client)
-    db.persist()
-    db = None
+        # Create the db with the first batch of documents to insert
+        batched_chromadb_insertions = batch_chromadb_insertions(chroma_client, documents)
+        first_insertion = next(batched_chromadb_insertions)
+        db = Chroma.from_documents(first_insertion, embeddings, persist_directory=persist_directory, client_settings=CHROMA_SETTINGS, client=chroma_client)
+        # Add the rest of batches of documents
+        for batched_chromadb_insertion in batched_chromadb_insertions:
+            db.add_documents(batched_chromadb_insertion)
 
     print(f"Ingestion complete! You can now run privateGPT.py to query your documents")
 

@@ -35,18 +35,11 @@ def yt_download_Transcribe(video_url, user_language):
     transcription = Transcribe_main(input_path=audio_file_path, language=f"{user_language}")
     print(transcription)
 
-    # Error handling for Transcribe_main and summarize_main functions
-    if not transcription:
-        print("Error: Transcription failed.")
-    else:
-        return transcription
+    return transcription
     
 def yt_download_main(transcription, min_percentage, max_percentage):
 
     summary_audio = summarize_main(text=transcription, min_summary_percentage=min_percentage, max_summary_percentage=max_percentage)
-
-    if not summary_audio:
-        print("Error: Summarization failed.")
 
     # Create a variable to store the cleaned summaries
     summary_text = ""
